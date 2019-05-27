@@ -1,0 +1,159 @@
+\documentclass[14pt,a4paper]{extreport}
+
+% Caption configuration
+\usepackage{caption}
+
+% Times New Roman, be sure to build with XeLaTeX
+\usepackage{fontspec}
+\usepackage[russian]{babel}
+\setmainfont{Times New Roman}
+
+% mock data
+\usepackage{lipsum}
+
+% russian
+\usepackage[utf8]{inputenc}
+
+\linespread{1.5}
+
+\usepackage{graphicx}
+\usepackage[
+    left = 2cm,
+    right = 1cm,
+    top = 1cm,
+    bottom = 2cm,
+    headheight = 2cm
+]{geometry}
+
+%% New commands
+
+% caption | screenshot index
+\newcommand{\sshot}[2]{\begin{figure}[ht]%
+\centering\includegraphics[width=0.8\textwidth]{../Screenshots/Screenshot_#2}%
+\caption{#1}%
+\label{sshot#2}%
+\end{figure}%
+}
+
+\newcommand{\header}[1]{%
+{
+\clearpage%
+\fontsize{16pt}{14pt}\selectfont
+\begin{center}
+\textbf{\MakeUppercase{#1}:}
+\end{center}
+}
+}
+
+\newcommand{\ospf}{\texttt{\MakeUppercase{ospf}}}
+
+\newcommand{\labyear}{2017}
+\newcommand{\labtitle}{Настройка сети с использованием OSPF. Индивидуальное задание по настройке OSPF}
+\newcommand{\prepod}{Ананченко~И.~В.}
+\newcommand{\student}{Кислюк~И.~В.}
+
+
+% Configurations
+
+% Рис 1. -> Рис 1 --, Таблица 1. -> Таблица 1 --
+% Рис 1. -> Рисунок 1
+\DeclareCaptionFormat{myformat}{\fontsize{12}{12}\selectfont#1#2#3}
+\captionsetup[figure]{format={myformat},name={Рисунок},labelsep=endash}
+
+\begin{document}
+
+	\begin{titlepage}
+	\begin{center}	
+		\fontsize{14pt}{14pt}\selectfont
+		МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ\\
+
+		\vspace*{0.6\baselineskip}
+
+		\MakeUppercase{Санкт-Петербургский Национальный Исследовательский Университет Информационных технологий, механики и оптики}		
+		
+		\vspace*{0.6\baselineskip}
+		\MakeUppercase{Факультет Инфокоммуникационных технологий}\\
+		\MakeUppercase{Кафедра программных систем}
+	
+		\vspace*{7\baselineskip}
+		\fontseries{m}\fontsize{19pt}{18pt}\selectfont
+		Отчет по лабораторной работе
+		
+		\fontseries{m}\fontsize{20pt}{18pt}\selectfont
+		\textbf{\labtitle}\\
+		\vspace*{1.15\baselineskip}
+		\end{center}
+	
+	\vspace*{2\baselineskip}
+	\begin{flushright}
+	\fontseries{m}\fontsize{14pt}{14pt}\selectfont
+	\textbf{Выполнил:}\\
+	\student\\
+	студент группы К4120\\
+	Проверил: \prepod\\
+	\end{flushright}
+	
+	\vspace{\fill}
+	\begin{center}
+	Санкт-Петербург\\
+	\vspace{-1ex}
+	\labyear
+	\end{center}
+	
+\end{titlepage}
+
+\fontsize{14pt}{14pt}\selectfont
+
+\header{Цель работы}
+
+
+Выполнить настройку дистанционно-векторного протокола маршрутизации \ospf{} на модели сети согласно варианту задания, в процессе настройки учесть, что в данной конфигурации сети присутствуют три различные \ospf -зоны
+
+\header{Ход работы}
+
+
+В первой части лабораторной работы необходимо выполнить настройку простой сети для работы с топологией \ospf .
+
+На первом этапе аналогично предыдущей работе выполним настройку всех добавленных подсетей: соединим соответствующие интерфейсы подходящими кабелями, зададим для них IP-адреса и маски подсетей.
+
+\sshot{Пример карскаса сети со статическими адресами}{1}
+
+\clearpage
+
+\sshot{Пример настройки роутера с \ospf}{2}
+\sshot{Пример установки приоритета марштрута}{3}
+
+Как видно, один из маршрутизаторов является граничным, что в целом корректно отражает действительность, т. к. именно он находится сразу в нескольких зонах.
+
+Процесс настройки маршрутизаторов существенно не отличается от процесса, рассмотренного в предыдущей лабораторной работе, поэтому сразу приведем результат — список \ospf -соседей для указанного на рисунке маршрутизатора.
+
+И наконец проверим, что клиентские компьютеры в разных зонах обмениваются ICMP-пакетами: выполним команду \texttt{ping}.
+
+\sshot{Пример проверки таблицы марштрутизации роутера R2. Часть 1}{4}
+
+От предыдущего задания структурная схема сети будет отличаться добавлением новой OSPF-зоны area 2, охватывающей следующие устройства и интерфейсы.
+
+\sshot{Пример проверки таблицы марштрутизации роутера R2. Часть 2}{5}
+\sshot{Пример проверки таблицы марштрутизации роутера R1}{6}
+
+\clearpage
+
+Следующим этапом было выполнение индивидуального задания согласно нарисованной схеме, приведенной на рисунке \ref{sshot0}. Шаги настройки повторяются, поэтому подробно не описываются.
+
+\sshot{Пример индивидуального задания}{0}
+\sshot{Пример каркаса сети индивидуального задания}{7}
+\sshot{Пример настройки \ospf в заданной сети}{8}
+\sshot{Пример настройки \texttt{ABR}-роутера в заданной сети на примере роутера R0}{9}
+\sshot{Пример настройки роутера R9}{10}
+\sshot{Пример таблицы маршрутизации на роутере R9}{11}
+\sshot{Пример пересылки \texttt{ICMP}-пакета в сети}{12}
+\sshot{Пример получения \texttt{ICMP}-пакета в сети}{13}
+\sshot{Пример таблицы маршрутизации роутера R1}{14}
+
+
+\header{Вывод}
+
+В результате выполнения данной лабораторной работы была произведена настройка протокола маршрутизации \ospf {} для трех различных зон и проверена возможность обмена пакетами для каждого из клиентских компьютеров внутри них
+
+\end{document}
+

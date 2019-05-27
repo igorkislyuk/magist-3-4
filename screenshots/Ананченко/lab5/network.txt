@@ -1,0 +1,18 @@
+windows main 2 - 192.168.0.102
+windows main 3 - 192.168.0.103
+
+IPv4 Pool - 192.168.0.150 with 49 addresses
+
+
+
+kislyuk-1 - 192.168.0.101 / 172.16.0.1
+kislyuk-2 - 192.168.0.102
+kislyuk-3 - 192.168.0.103 
+kislyuk-4 - 172.16.0.2
+
+kislyuk-1 - coordinator
+kislyuk-2 - client-1
+kislyuk-3 - client-2
+
+
+from 26 sñreenshot âòîğàÿ ÷àñòü
